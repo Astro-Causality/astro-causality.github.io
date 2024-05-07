@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items>
+  <item>
+    <!--　　"+agentnm+" 　作業職員の名前　-->
+    <!--　～です　-->
+    <T1>です</T1>
+    <!--　～した　-->
+    <T2>した</T2>
+    <!--　～た　-->
+    <T3>た</T3>
+    <!--　～ない　-->
+    <T4>ない</T4>
+    <!--　～いる　-->
+    <T5>いる</T5>
+    <!--　クリティカル、　-->
+    <Tcrit>クリティカル、</Tcrit>
+    <!--　ギフト入手　-->
+    <Tgift>ギフト入手</Tgift>
+    <!--　ファンブル　-->
+    <Tfumb>ファンブル、観測レベル上昇なし</Tfumb>
+    <!--　作業成功　-->
+    <Tsuccess>作業成功</Tsuccess>
+    <!--　作業失敗　-->
+    <Tfailure>作業失敗</Tfailure>
+    <!--　生還　-->
+    <Tsurvive>生還</Tsurvive>
+    <!--　死亡　-->
+    <Tdead>死亡</Tdead>
+    <!--　～は脱走した　-->
+    <Tescape>は脱走した</Tescape>
+    <!--　〇〇パニックに陥った　-->
+    <Tpanic>パニックに陥った</Tpanic>
+  </item>
+</items>

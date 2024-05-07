@@ -1,0 +1,355 @@
+[
+  {
+    "abnm_list":
+    {
+      "slot_1":{
+        "code":"AC-X-00-000",
+        "name":["名前","真名"],
+        "rank":[0,0],
+        "category":"basic",
+        "link": null,
+        "work_data":{
+          "work_types":["本能","洞察","愛着","抑圧"],
+          "condition":{
+            "total_ebox":10,
+            "range":[4,8]
+          },
+          "roll_judge": [1,1,1,1],
+          "dmg_work": {
+            "type": 0,
+            "range": [1,2]
+          }
+        },
+        "ability":{
+          "counter":1
+        },
+        "sprs_data":{
+          "escape": true,
+          "dmg_sprs": {
+            "type": 0,
+            "range": [1,2]
+          },
+          "resist": [1.0,1.0,1.0,1.0]
+        },
+        "ego":{
+          "name": "E.G.O.名",
+          "gift":{
+            "chance":0.1,
+            "part":0,
+            "buf":{
+              "type":0,
+              "num":1
+            },
+            "special":{
+              "has":false
+            }
+          },
+          "weapon":{
+            "rank":0,
+            "distance":0,
+            "dmg":{
+              "type":0,
+              "range":[1,2]
+            }
+          },
+          "suit": {
+            "rank": 0,
+            "resist":[1.0,1.0,1.25,2.0]
+          }
+        },
+        "lyrics":{
+          "extract": "抽出時テキスト",
+          "ability":["特殊能力発動テキスト1","特殊能力発動テキスト2"]
+        }
+      },
+      "slot_2":{
+        "code": "AC-X-00-000",
+        "name": [
+          "名前",
+          "真名"
+        ],
+        "rank": [
+          0,
+          0
+        ],
+        "category": "basic",
+        "link": null,
+        "work_data": {
+          "work_types":["本能","洞察","愛着","抑圧"],
+          "condition": {
+            "total_ebox": 10,
+            "range": [
+              4,
+              8
+            ]
+          },
+          "roll_judge": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dmg_work": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          }
+        },
+        "ability": {
+          "counter": 1
+        },
+        "sprs_data": {
+          "escape": true,
+          "dmg_sprs": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          },
+          "resist": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "ego": {
+          "name": "E.G.O.名",
+          "gift": {
+            "chance": 0.1,
+            "part": 0,
+            "buf": {
+              "type": 0,
+              "num": 1
+            },
+            "special": {
+              "has": false
+            }
+          },
+          "weapon": {
+            "rank": 0,
+            "distance": 0,
+            "dmg": {
+              "type": 0,
+              "range": [
+                1,
+                2
+              ]
+            }
+          },
+          "suit": {
+            "rank": 0,
+            "resist": [
+              1.0,
+              1.0,
+              1.25,
+              2.0
+            ]
+          }
+        },
+        "lyrics": {
+          "extract": "抽出時テキスト",
+          "ability": [
+            "特殊能力発動テキスト1",
+            "特殊能力発動テキスト2"
+          ]
+        }
+      },
+      "slot_3":{
+        "code": "AC-X-00-000",
+        "name": [
+          "名前",
+          "真名"
+        ],
+        "rank": [
+          0,
+          0
+        ],
+        "category": "basic",
+        "link": null,
+        "work_data": {
+          "work_types":["本能","洞察","愛着","抑圧"],
+          "condition": {
+            "total_ebox": 10,
+            "range": [
+              4,
+              8
+            ]
+          },
+          "roll_judge": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dmg_work": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          }
+        },
+        "ability": {
+          "counter": 1
+        },
+        "sprs_data": {
+          "escape": true,
+          "dmg_sprs": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          },
+          "resist": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "ego": {
+          "name": "E.G.O.名",
+          "gift": {
+            "chance": 0.1,
+            "part": 0,
+            "buf": {
+              "type": 0,
+              "num": 1
+            },
+            "special": {
+              "has": false
+            }
+          },
+          "weapon": {
+            "rank": 0,
+            "distance": 0,
+            "dmg": {
+              "type": 0,
+              "range": [
+                1,
+                2
+              ]
+            }
+          },
+          "suit": {
+            "rank": 0,
+            "resist": [
+              1.0,
+              1.0,
+              1.25,
+              2.0
+            ]
+          }
+        },
+        "lyrics": {
+          "extract": "抽出時テキスト",
+          "ability": [
+            "特殊能力発動テキスト1",
+            "特殊能力発動テキスト2"
+          ]
+        }
+      },
+      "slot_tool":{
+        "code": "AC-X-00-000",
+        "name": [
+          "名前",
+          "真名"
+        ],
+        "rank": [
+          0,
+          0
+        ],
+        "category": "tools",
+        "link": null,
+        "work_data": {
+          "work_types":["使用","返却"],
+          "condition": {
+            "total_ebox": 10,
+            "range": [
+              4,
+              8
+            ]
+          },
+          "roll_judge": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dmg_work": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          }
+        },
+        "ability": {
+          "counter": 1
+        },
+        "sprs_data": {
+          "escape": true,
+          "dmg_sprs": {
+            "type": 0,
+            "range": [
+              1,
+              2
+            ]
+          },
+          "resist": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "ego": {
+          "name": "E.G.O.名",
+          "gift": {
+            "chance": 0.1,
+            "part": 0,
+            "buf": {
+              "type": 0,
+              "num": 1
+            },
+            "special": {
+              "has": false
+            }
+          },
+          "weapon": {
+            "rank": 0,
+            "distance": 0,
+            "dmg": {
+              "type": 0,
+              "range": [
+                1,
+                2
+              ]
+            }
+          },
+          "suit": {
+            "rank": 0,
+            "resist": [
+              1.0,
+              1.0,
+              1.25,
+              2.0
+            ]
+          }
+        },
+        "lyrics": {
+          "extract": "抽出時テキスト",
+          "ability": [
+            "特殊能力発動テキスト1",
+            "特殊能力発動テキスト2"
+          ]
+        }
+      }
+    }
+}
+]
