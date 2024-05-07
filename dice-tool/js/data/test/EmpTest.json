@@ -1,0 +1,19 @@
+[
+  [
+    {
+      "name":"",
+      "gender":"男",
+      "rank":1,
+      "status":{
+        "goodat":0,
+        "val":[25,15,15,15]
+      },
+      "exp":[0,0,0,0],
+      "equip":{
+        "weapon":0,
+        "suit":0,
+        "gift":null
+      }
+    }
+  ]
+]
