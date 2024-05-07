@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="/favicon.ico" sizes="32x32"><!-- 32×32 -->
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- 180×180 -->
+  <link rel="icon" href="./favicon/favicon.ico" sizes="32x32"><!-- 32×32 -->
+  <link rel="icon" href="./favicon/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><!-- 180×180 -->
   <link rel="stylesheet" href="./css/style.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-  <script src="./js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/main_test.js"></script>
   <title>AsCt判定支援ツール</title>
 </head>
 
@@ -32,50 +32,51 @@
               <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
               <optgroup label="上層">
                 <option value="00">本部 - 制御課</option><!--
-                                <option value="01">情報部 - 検閲課</option>
-                                <option value="02">人事部 - 教育課</option>
-                                <option value="03">厚生部 - 安全課</option>-->
-                </optgroup>
+                <option value="01">情報部 - 検閲課</option>
+                <option value="02">人事部 - 教育課</option>
+                <option value="03">厚生部 - 安全課</option>-->
+              </optgroup>
               <!--
-                            <optgroup label="中層">
-                              <option value="04">本部 - 管制課A</option>
-                              <option value="05">本部 - 管制課B</option>
-                              <option value="06">人事部 - 懲戒課</option>
-                              <option value="07">厚生部 - 福祉課</option>
-                              <option value="08">警備部 - 防衛課</option>
-                              <option value="09">警備部 - 視察課</option>
-                            </optgroup>
-                            <optgroup label="下層">
-                              <option value="10">抽出部 - 精製課</option>
-                              <option value="11">抽出部 - 抽出課</option>
-                              <option value="12">情報部 - 記録課</option>
-                              <option value="13">本部 - 設計課</option>
-                            </optgroup>-->
-              </select>
+              <optgroup label="中層">
+                <option value="04">本部 - 管制課A</option>
+                <option value="05">本部 - 管制課B</option>
+                <option value="06">人事部 - 懲戒課</option>
+                <option value="07">厚生部 - 福祉課</option>
+                <option value="08">警備部 - 防衛課</option>
+                <option value="09">警備部 - 視察課</option>
+              </optgroup>
+              <optgroup label="下層">
+                <option value="10">抽出部 - 精製課</option>
+                <option value="11">抽出部 - 抽出課</option>
+                <option value="12">情報部 - 記録課</option>
+                <option value="13">本部 - 設計課</option>
+              </optgroup>-->
+            </select>
           </label>
+          <input type="button" id="set_depart" value="セット">
           <input type="button" id="clear_depart" value="選択解除">
+        </div>
+        <div id="depart_info" style="visibility:collapse;">
+          <h2 id="depart_name" style="text-align: center;"></h2>
+          <div>
+            <h2>【職員を選択】</h2>
+            <ul id="em_list"></ul>
           </div>
-          <div id="depart_info" style="visibility:collapse;">
-            <h2 id="depart_name" style="text-align: center;"></h2>
-            <div>
-              <h2>【職員を選択】</h2>
-              <ul id="em_list"></ul>
-            </div>
-            <div>
-              <h2>【異次元体一覧】</h2>
-              <ul id="ab_list"></ul>
-            </div>
-            <div>
-              <input type="button" id="start_work" value="業務開始">
-            </div>
+          <div>
+            <h2>【異次元体一覧】</h2>
+            <ul id="ab_list"></ul>
           </div>
+          <div>
+            <input type="button" id="start_work" value="業務開始">
+          </div>
+        </div>
       </form>
       <form name="roll_work" id="work_frm" method="post" style="visibility:collapse;"><!-- 作業ロール -->
         <div>
           <h2>【作業対象を選択】</h2>
           <ul id="ab_select"></ul>
-          </div>
-          <div>
+        </div>
+        <div>
           <label for="dice">作業</label>
           <select name="work_type" id="work_select">
             <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
@@ -107,7 +108,10 @@ ID:ID3桁
         <textarea name="del" cols="40" rows="15"></textarea>
         <div id="link_log"></div>
         <div id="escape_log"></div>
-        <details><summary>ダイスツール</summary>
+      </form>
+      <form name="opt_diceroll" method="post">
+        <details>
+          <summary>ダイスツール</summary>
           <div>
             <p>ダイスを自由に設定し、指定回数一括で振ることができます。特殊能力のお供にどうぞ。</p>
           </div>
@@ -125,7 +129,6 @@ ID:ID3桁
           </ul>
         </details>
       </form>
-
       <details><!-- 鎮圧ロール -->
         <summary>【鎮圧】</summary>
         <p>耐性右の数値は補正等&emsp;負の数(-x)や小数(0.x)も入力できます。</p>
@@ -168,15 +171,14 @@ ID:ID3桁
           </div>
         </form>
       </details>
-      <details><summary>リザルトポイント計算ツール</summary>
+      <details>
+        <summary>リザルトポイント計算ツール</summary>
         <form name="total_result" method="post">
           <div>
-            <label for="dice">異次元体への作業成果(合計獲得PE-Box数)
-              <input type="number" name="work_pe_sum" id="work_pe_sum" value="0">
+            <label for="dice">異次元体への作業成果(合計獲得PE-Box数) <input type="number" name="work_pe_sum" id="work_pe_sum" value="0">
             </label>
           </div>
-          <div>鎮圧成果(とどめを刺した異次元体・職員の数)
-            <div>
+          <div>鎮圧成果(とどめを刺した異次元体・職員の数) <div>
               <label for="dice">ZAYIN:</label>
               <input type="number" name="sup_Z" id="sup_Z" value="0">
               <label for="dice">TETH:</label>
@@ -194,8 +196,8 @@ ID:ID3桁
           <input type="button" id="submit_result" value="ポスト/ツイートする">
         </form>
       </details>
-
-      <details><summary>説明</summary>
+      <details>
+        <summary>説明</summary>
         <div style="margin:20px auto;">
           <pre>
 <h2>▼&nbsp;操作方法&nbsp;▼</h2>
@@ -242,7 +244,8 @@ ID:ID3桁
         </div>
       </details>
       <div>
-        <details><summary>獲得経験値</summary>
+        <details>
+          <summary>獲得経験値</summary>
           <form name="exp_result" method="post">
             <ul style="list-style-type: none; padding-left: 40px;">
               <div id="exp_result"></div>
@@ -251,7 +254,8 @@ ID:ID3桁
         </details>
       </div>
       <div>
-        <details><summary>リザルトログ</summary>
+        <details>
+          <summary>リザルトログ</summary>
           <ul>
             <div id="total_log"></div>
           </ul>
@@ -261,8 +265,7 @@ ID:ID3桁
     <footer><!-- フッター -->
       <div id="ft_wrap">
         <div class="logo"></div><!-- ロゴマーク -->
-          <p id="ft_text">Astro&nbsp;Causality<br>
-          &#64;AstroCausality</p>
+        <p id="ft_text">Astro&nbsp;Causality<br> &#64;AstroCausality</p>
       </div>
     </footer>
   </div>

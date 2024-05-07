@@ -1,3 +1,24 @@
+class ResultLog {
+  logId;
+  agent;
+  logTxt;
+  static defaultTxt = "自動で経験値とリザルトツールに加算されます。\n消去でログが消えます(※リザルトツールからも引かれます)。";
+}
+
+export class WorkLog extends ResultLog{
+  abnmId;
+  wktp;
+  dcv;
+  ge;
+  rk;
+  st;
+  bf;
+  ct;
+  ad;
+
+  constructor(){}
+}
+
 const InnerLogData = {
   id: "000",
   work: "本能",
@@ -5,100 +26,24 @@ const InnerLogData = {
   agent: "NAME",
   gender: "?",
   rank: 1,
-  status: [1,1,1,1],
+  status: [1, 1, 1, 1],
   buf: "000",
   count: 1,
   additional: 0,
 };
 
 let se_logt = [];
+let selogtext = "";
 let logt = [];
 let set_log = [];
 let set_logcount = 1;
 
 let reco = 1;
-let log = ["自動で経験値とリザルトツールに加算されます。\n消去でログが消えます　※リザルトツールからも引かれます"];
+let log = [
+  ResultLog.defaultTxt,
+];
 
-function setInfo(idd) {
-  for (i = 1; i < 11; i++) {
-    const InfoId = "info" + idd + i;
-    if (i == 1) {
-      InnerLogData.agent = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.agent;
-    }
-    if (i == 2) {
-      InnerLogData.gender = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.gender;
-    }
-    if (i == 3) {
-      InnerLogData.rank = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.rank;
-    }
-    if (i == 4) {
-      InnerLogData.status[0] = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.status[0];
-    }
-    if (i == 5) {
-      InnerLogData.status[1] = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.status[1];
-    }
-    if (i == 6) {
-      InnerLogData.status[2] = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.status[2];
-    }
-    if (i == 7) {
-      InnerLogData.status[3] = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.status[3];
-    }
-    if (i == 8) {
-      InnerLogData.buf = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.buf;
-    }
-    if (i == 9) {
-      InnerLogData.additional = document.workroll[InfoId].value;
-      save[idd][i] = InnerLogData.additional;
-    }
-    if (i == 10) {
-      tt14 = document.workroll[InfoId].value;
-      save[idd][i] = tt14;
-      syisg.push(tt14);
-    }
-  }
-  setText();
-  document.workroll["buf"].value = InnerLogData.additional;
-  kakee = syisg.indexOf(tt14);
-  syid = idd;
-}
-
-function setText(dice_value) {
-  result_txt =
-    "@AstroCausality\n#AsCt_作業\nID:" +
-    InnerLogData.id +
-    "\n作業:" +
-    InnerLogData.work +
-    "\n出目:" +
-    dice_value +
-    "\n名前:" +
-    InnerLogData.agent +
-    "\n性別:" +
-    InnerLogData.gender +
-    "\nランク:" +
-    InnerLogData.rank +
-    "\n勇気:" +
-    InnerLogData.status[0] +
-    "\n慎重:" +
-    InnerLogData.status[1] +
-    "\n自制:" +
-    InnerLogData.status[2] +
-    "\n正義:" +
-    InnerLogData.status[3] +
-    "\n加護:" +
-    InnerLogData.buf +
-    "\n現在カウント:" +
-    InnerLogData.count;
-  document.workroll["result"].value = result_txt;
-  document.getElementById("st_b2").value = InnerLogData.status[2];
-}
+let save = [];
 
 function setLog(loche) {
   for (i = 0; i < set_log_count; i++) {
@@ -393,34 +338,34 @@ function listLog() {
   logcount += 1;
 }
 
-function deleteLog(del_no, pet, del_id, keiket, ksagyo) {
+function kesi(del_no, pet, del_i, keiket, ksagyo) {
   console.log("開始");
   log[del_no] = "miss";
-  kid = "li" + del_no;
-  kdoc = document.getElementById(kid);
+  const DelID = "li" + del_no;
+  kdoc = document.getElementById(DelID);
   kdoc.remove();
   pp = pet;
   petiplus(pp);
-  na = ksagyo + 1;
-  keiti[del_id][na] -= keiket;
-  if (keiti[del_id][na] <= 0) {
-    keiti[del_id][na] = 0;
+  const DelIn_i = ksagyo + 1;
+  keiti[del_i][DelIn_i] -= keiket;
+  if (keiti[del_i][DelIn_i] <= 0) {
+    keiti[del_i][DelIn_i] = 0;
   }
 
   keiktxt =
     '<li class="log"  >' +
-    keiti[del_id][0] +
+    keiti[del_i][0] +
     agentnm +
     "　勇気：" +
-    keiti[del_id][1] +
+    keiti[del_i][1] +
     "慎重：" +
-    keiti[del_id][2] +
+    keiti[del_i][2] +
     "自制：" +
-    keiti[del_id][3] +
+    keiti[del_i][3] +
     "正義：" +
-    keiti[del_id][4] +
+    keiti[del_i][4] +
     "</li>";
-  keilog[del_id] = keiktxt;
+  keilog[del_i] = keiktxt;
   keilogtext = keilog.join("");
   target = document.getElementById("exp_result");
   target.innerHTML = keilogtext;

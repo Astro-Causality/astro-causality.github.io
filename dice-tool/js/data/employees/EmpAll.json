@@ -1,0 +1,41 @@
+[
+  {
+    "id":"000",
+    "details":{
+      "nm": "NONAME",
+      "gender": "男",
+      "rank": 1,
+      "status": {
+        "goodat": 0,
+        "val": [
+          25,
+          15,
+          15,
+          15
+        ]
+      },
+      "exp": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "equip": {
+        "weapon_id": "999",
+        "suit_id": "999",
+        "gift_id": {
+          "head": null,
+          "face": null,
+          "eye": null,
+          "mouth": null,
+          "hand": null,
+          "cheek": null,
+          "chest": null,
+          "back_l": null,
+          "back_r": null,
+          "special": null
+        }
+      }
+    }
+  }
+]

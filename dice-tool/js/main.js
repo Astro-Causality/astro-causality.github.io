@@ -1,101 +1,39 @@
-import * as listGen from "./list_gen.js";
-import * as work from "./work.js";
-
+//危険度・ダメージ属性・ステータス名置換用
 const RankTxt = ["ZAYIN", "TETH", "HE", "WAW", "ALEPH"];
 const DmgTypeTxt = ["RED", "WHITE", "BLACK", "PALE"];
 const StatusTxt = ["勇気", "慎重", "自制", "正義"];
 
-window.addEventListener("load", () => {
-  target = document.querySelector("#output");
-  target.innerHTML =
-    'Ver1.0 公式アカウントに記載のバージョンと異なる場合は更新してください。<input type="button" id="change_txt_style" value="口調変更">';
-  document.querySelector("#change_txt_style").addEventListener("click", openFile());
+//ロード完了時処理
+$(function () {
+  ("use strict");
 
-  document.querySelector("#diceroll_work").addEventListener("click", work.rollWorkDice(),false);
-});
+  //バージョン記載
+  $("#output").text(
+    "Ver1.0　公式アカウントに記載のバージョンと異なる場合は更新してください。"
+  );
 
-function getData(e) {
-  console.log("test");
-  var xml = e.target.result;
+  $("#set_depart").click(setDepart());
 
-  const parser = new DOMParser();
-  const xmlString = xml;
-  const doc1 = parser.parseFromString(xmlString, "application/xml");
-  var nodes = doc1.getElementsByTagworkerName("T1");
-  T1 = nodes[0].textContent;
-  console.log(T1);
-  var nodes = doc1.getElementsByTagworkerName("T2");
-  T2 = nodes[0].textContent;
-  console.log(T2);
-  var nodes = doc1.getElementsByTagworkerName("Tcrit");
-  Tcrit = nodes[0].textContent;
-  console.log(Tcrit);
-  var nodes = doc1.getElementsByTagworkerName("Tgift");
-  Tgift = nodes[0].textContent;
-  console.log(Tgift);
-  var nodes = doc1.getElementsByTagworkerName("Tfumb");
-  Tfumb = nodes[0].textContent;
-  console.log(Tfumb);
-  var nodes = doc1.getElementsByTagworkerName("Tsuccess");
-  Tsuccess = nodes[0].textContent;
-  console.log(Tsuccess);
-  var nodes = doc1.getElementsByTagworkerName("Tfailure");
-  Tfailure = nodes[0].textContent;
-  console.log(Tfailure);
-  var nodes = doc1.getElementsByTagworkerName("Tsurvive");
-  Tsurvive = nodes[0].textContent;
-  console.log(Tsurvive);
-  var nodes = doc1.getElementsByTagworkerName("Tdead");
-  Tdead = nodes[0].textContent;
-  console.log(Tdead);
-  var nodes = doc1.getElementsByTagworkerName("Tescape");
-  Tescape = nodes[0].textContent;
-  console.log(Tescape);
-  var nodes = doc1.getElementsByTagworkerName("Tpanic");
-  Tpanic = nodes[0].textContent;
-  console.log(Tpanic);
-}
+  $("#clear_depart").click(resetAll());
 
-function openFile() {
-  T1 = "です";
-  T2 = "した";
-  T3 = "た";
-  T4 = "ない";
-  T5 = "いる";
-  Tcrit = "クリティカル!　";
-  Tgift = "ギフト入手";
-  Tfumb = "ファンブル!　観測レベル上昇なし";
-  Tsuccess = "作業成功";
-  Tfailure = "作業失敗";
-  Tsurvive = "生還";
-  Tdead = "死亡";
-  Tescape = "は脱走した";
-  Tpanic = "パニックに陥った";
-  const input = document.createElement("input");
-  input.type = "file";
-  input.addEventListener("change", function (e) {
-    const files = input.files;
-    var file = files[0];
-    var reader = new FileReader();
-    reader.addEventListener("load", getData, false);
-    reader.readAsText(file);
-
-    var result = e.target.files[0];
-
-    reader.addEventListener("load", () => {
-      var title = result.agentnm.match(/(.*)\.xml$/)[1];
-      lodata = result;
-      console.log(result);
-    });
+  $("#start_work").click(function () {
+    $("#workfrm").css("visibility", "visible");
   });
 
-  input.click();
-}
+  //作業ロール「ダイス」ボタン
+  $("#diceroll_work").click(function () {
+    $.getScript("./work.js");
+  });
+
+  //ダイスツールの「振る」ボタン
+  $("#opt_roll").on("click",rollOptionalDice());
+});
 
 function saveLocalStorage() {
-  const json_header = [{ no: setrog.length }, { data: save }];
+  //職員データをローカルストレージとJSONファイルで保存
+  const json_header = [{ no: setlog.length }, { data: save }];
   let data_json = JSON.stringify(json_header);
-  localStorage.setItem("data_employees",data_json);
+  localStorage.setItem("data_employees", data_json);
   const SaveDate = new Date();
   const FileName =
     "ASCT_save_" +
@@ -107,4 +45,38 @@ function saveLocalStorage() {
   LinkTag.href = "data:text/plain," + encodeURIComponent(data_json);
   LinkTag.download = FileName;
   LinkTag.click();
+}
+
+function resetAll() {
+  $("#depart_info, #em_list, #ab_list").css("visibility", "collapse");
+  for (let i = 0; i < $("#ab_list label").length; i++) {
+    $(`#${i + 1}`).remove();
+  }
+
+  localStorage.removeItem("data_employees");
+}
+
+function setDepart() {
+  $.getScript("./list_gen.js", abListGen(),emListGen());
+  $("#depart_info, #em_list, #ab_list").css("visibility", "visible");
+}
+
+//任意ダイスツール用関数
+function rollOptionalDice() {
+  console.log("開始");
+  const OptNum = parseInt($("#opt_num").val());
+  const OptFaces = parseInt($("#opt_faces").val());
+  const OptTimes = parseInt($("#opt_times").val());
+
+  let opt_values = [];
+
+  for (i = 0; i < OptTimes; i++) {
+    let opt_sum = 0;
+    for (j = 0; j < OptNum; j++) {
+      const OptTmp = Math.floor(Math.random() * OptFaces + 1);
+      opt_sum += OptTmp;
+    }
+    $("#result_opt").add("li.log").text(opt_sum);
+    console.log(opt_values[i]);
+  }
 }
