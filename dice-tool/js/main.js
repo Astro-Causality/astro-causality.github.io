@@ -1,6 +1,11 @@
 import Department from "./libs/Department.js";
 import { rollOptionalDice } from "./libs/OptionalTool.js";
 
+const DayData = {
+  day: 1,
+  retry: 0,
+};
+
 //危険度・ダメージ属性・ステータス名置換用
 const RankTxt = ["ZAYIN", "TETH", "HE", "WAW", "ALEPH"];
 const DmgTypeTxt = ["RED", "WHITE", "BLACK", "PALE"];

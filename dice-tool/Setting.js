@@ -3,7 +3,7 @@ export const DayData = {
   retry:0
 };
 
-export const DepData = [
+export default DepData = [
     [
       { abs: ["001", "", "", ""], ems: ["", "", "", "", ""] }, //1:本部-制御課
       { abs: ["", "", "", ""], ems: ["", "", "", "", ""] }, //5a:本部-管制1課
