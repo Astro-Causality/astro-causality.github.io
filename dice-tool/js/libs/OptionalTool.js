@@ -6,7 +6,7 @@ export const rollOptionalDice = function() {
 
   let opt_values = [];
 
-  for (i = 0; i < OptTimes; i++) {
+  for (let i = 0; i < OptTimes; i++) {
     let opt_sum = 0;
     for (j = 0; j < OptNum; j++) {
       const OptTmp = Math.floor(Math.random() * OptFaces + 1);
