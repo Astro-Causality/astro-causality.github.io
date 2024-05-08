@@ -333,8 +333,8 @@ function listLog() {
     return item !== "miss";
   });
   logtext = result.join("");
-  target = document.getElementById("comelog");
-  target.innerHTML = logtext;
+  target = document.getElementById("total_log");
+  $("#total_log").html(logtext);
   logcount += 1;
 }
 
@@ -353,7 +353,7 @@ function kesi(del_no, pet, del_i, keiket, ksagyo) {
   }
 
   keiktxt =
-    '<li class="log"  >' +
+    '<li class="log">' +
     keiti[del_i][0] +
     agentnm +
     "　勇気：" +

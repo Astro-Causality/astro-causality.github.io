@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- 180×180 -->
   <link rel="stylesheet" href="./css/style.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-  <script src="./js/main.js"></script>
+  <script type="module" src="./js/main.js"></script>
   <title>AsCt判定支援ツール</title>
 </head>
 
@@ -24,35 +24,39 @@
       </div>
     </header>
     <main id="content"><!-- メインコンテンツ -->
-      <form name="selector_depart" method="post">
+      <form name="selector_depart" method="post"><!-- 部門選択・セット -->
         <div>
-          <label>
+          <label><!-- 選択用プルダウン -->
             <h2>【部門を選択】</h2>
             <select name="department">
               <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
               <optgroup label="上層">
-                <option value="00">本部 - 制御課</option><!--
-                                <option value="01">情報部 - 検閲課</option>
-                                <option value="02">人事部 - 教育課</option>
-                                <option value="03">厚生部 - 安全課</option>-->
-                </optgroup>
+                <option value="00">本部 - 制御課</option>
+                <!--
+                  <option value="10">情報部 - 検閲課</option>
+                  <option value="20">人事部 - 教育課</option>
+                  <option value="30">厚生部 - 安全課</option>
+                -->
+              </optgroup>
               <!--
-                            <optgroup label="中層">
-                              <option value="04">本部 - 管制課A</option>
-                              <option value="05">本部 - 管制課B</option>
-                              <option value="06">人事部 - 懲戒課</option>
-                              <option value="07">厚生部 - 福祉課</option>
-                              <option value="08">警備部 - 防衛課</option>
-                              <option value="09">警備部 - 視察課</option>
-                            </optgroup>
-                            <optgroup label="下層">
-                              <option value="10">抽出部 - 精製課</option>
-                              <option value="11">抽出部 - 抽出課</option>
-                              <option value="12">情報部 - 記録課</option>
-                              <option value="13">本部 - 設計課</option>
-                            </optgroup>-->
-              </select>
+              <optgroup label="中層">
+                <option value="01">本部 - 管制課A</option>
+                <option value="02">本部 - 管制課B</option>
+                <option value="21">人事部 - 懲戒課</option>
+                <option value="31">厚生部 - 福祉課</option>
+                <option value="40">警備部 - 防衛課</option>
+                <option value="41">警備部 - 視察課</option>
+              </optgroup>
+              <optgroup label="下層">
+                <option value="50">抽出部 - 精製課</option>
+                <option value="51">抽出部 - 抽出課</option>
+                <option value="11">情報部 - 記録課</option>
+                <option value="03">本部 - 設計課</option>
+              </optgroup>
+              -->
+            </select>
           </label>
+          <input type="button" id="set_depart" value="セット">
           <input type="button" id="clear_depart" value="選択解除">
           </div>
           <div id="depart_info" style="visibility:collapse;">
@@ -107,7 +111,10 @@ ID:ID3桁
         <textarea name="del" cols="40" rows="15"></textarea>
         <div id="link_log"></div>
         <div id="escape_log"></div>
-        <details><summary>ダイスツール</summary>
+      </form>
+      <form name="opt_diceroll" method="post">
+        <details>
+          <summary>ダイスツール</summary>
           <div>
             <p>ダイスを自由に設定し、指定回数一括で振ることができます。特殊能力のお供にどうぞ。</p>
           </div>
@@ -151,10 +158,10 @@ ID:ID3桁
             <option disabled selected>▼&nbsp;防御側の耐性&nbsp;▼</option>
             <option value="2.00">脆弱(&times;2.0)</option>
             <option value="1.50">脆弱(&times;1.5)</option>
-            <option value="1.25">弱い(&times;1.25)</option>
+            <option value="1.25">弱点(&times;1.25)</option>
             <option value="1.00">普通(&times;1.0)</option>
-            <option value="0.75">強い(&times;0.75)</option>
-            <option value="0.50">半減(&times;0.5)</option>
+            <option value="0.75">抵抗(&times;0.75)</option>
+            <option value="0.50">耐性(&times;0.5)</option>
             <option value="0.00">免疫(&times;0.0)</option>
           </select>
           <label for="dice">&nbsp;&times;&nbsp;</label>
@@ -226,7 +233,7 @@ ID:ID3桁
 <h2>▼&nbsp;画面の見方&nbsp;▼</h2>
 &#64;AstroCausality&#009;メンション
 #AsCt_作業&#009;&#009;ハッシュタグ
-異次元体ID:000&#009;作業異次元体のID(3桁)
+異次元体ID:000&#009;作業対象の異次元体ID3桁
 作業:本能&#009;&#009;&#009;作業内容&emsp;本能、洞察、愛着、抑圧、使用&nbsp;など
 出目:1&#009;&#009;&#009;&#009;作業ダイスの出目
 名前:name&#009;&#009;&#009;作業職員の名前
@@ -237,14 +244,14 @@ ID:ID3桁
 自制:1&#009;&#009;&#009;&#009;自制ランク
 正義:1&#009;&#009;&#009;&#009;正義ランク
 加護:000&#009;&#009;&#009;付与されている加護等の異次元体ID(3桁)&emsp;複数ある場合は半角コンマで区切る
-現在カウント:1&#009;&#009;現在のカウンター
+現在カウント:1&#009;&#009;現在のディムカウンター
           </pre>
         </div>
       </details>
       <div>
         <details><summary>獲得経験値</summary>
           <form name="exp_result" method="post">
-            <ul style="list-style-type: none; padding-left: 40px;">
+            <ul style="list-style-type:none; padding-left:40px;">
               <div id="exp_result"></div>
             </ul>
           </form>
