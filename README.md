@@ -1,1 +1,3 @@
-# astro-causality.github.io
+# Astro Causality
+
+[ダイスツールのテスト用](./dice-tool/index.html)
