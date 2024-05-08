@@ -4,6 +4,8 @@ export default class Employee {
   gender = 1;
   gdst = 0;
   st;
+  curHP;
+  curSP;
   strk;
   agrk;
   exp = [0, 0, 0, 0];
@@ -27,6 +29,8 @@ export default class Employee {
     this.gender = gender;
     this.gdst = good; // 0:勇気 1:慎重 2:自制 3:正義
     this.st = initSt(this.gdst); // ステータス数値
+    curHP = this.st[0];
+    curSP = this.st[1];
     this.strk = calcStRank(this.st);
     this.agrk = calcAgRank();
   }
@@ -40,11 +44,11 @@ export default class Employee {
   get unitGender() {
     return this.gender;
   }
-  get unitHP() {
-    return this.st[0];
+  get unitMaxHP() {
+    return this.curHP;
   }
-  get unitSP() {
-    return this.st[1];
+  get unitMaxSP() {
+    return this.curSP;
   }
   get stBlack() {
     return calcRank(this.st[2]);
@@ -53,21 +57,17 @@ export default class Employee {
     return calcRank(this.st[3]);
   }
 
-  // エージェントランク計算
-  static calcAgRank() {
-    const ranks = calcRank(this.st);
-    let rksum = 0;
-    ranks.forEach((rank) => {
-      rksum += rank;
-    });
-    if (rksum < 4 || rksum > 21) return;
-    else {
-      if (rksum > 15) return 5;
-      else if (rksum > 11) return 4;
-      else if (rksum > 8) return 3;
-      else if (rksum > 5) return 2;
-      else return 1;
-    }
+  get isPanic() {
+    return this.curSP <= 0;
+  }
+  get isDead() {
+    return this.curHP <= 0;
+  }
+
+  // 初期ステ設定
+  set initSt(good) {
+    this.st = [15, 15, 15, 15];
+    this.st[good] = 25;
   }
 
   // 能力ランク計算
@@ -99,9 +99,20 @@ export default class Employee {
     }
   }
 
-  // 初期ステ設定
-  set initSt(good) {
-    this.st = [15, 15, 15, 15];
-    this.st[good] = 25;
+  // エージェントランク計算
+  static calcAgRank() {
+    const ranks = calcRank(this.st);
+    let rksum = 0;
+    ranks.forEach((rank) => {
+      rksum += rank;
+    });
+    if (rksum < 4 || rksum > 21) return;
+    else {
+      if (rksum > 15) return 5;
+      else if (rksum > 11) return 4;
+      else if (rksum > 8) return 3;
+      else if (rksum > 5) return 2;
+      else return 1;
+    }
   }
 }

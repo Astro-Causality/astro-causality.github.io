@@ -32,6 +32,23 @@ export default class Department {
   employees = [""];
   abnorms = [""];
 
+  textFx = {
+    t1: "です",
+    t2: "した",
+    t3: "た",
+    t4: "ない",
+    t5: "いる",
+    crit: "クリティカル、　",
+    gtgf: "ギフト入手",
+    fumb: "ファンブル、観測レベル上昇なし",
+    succ: "作業成功",
+    falr: "作業失敗",
+    suvv: "生還",
+    dead: "死亡",
+    escp: "は脱走した",
+    pncd: "パニックに陥った"
+  };
+
   static cateNames = ["本", "情報", "人事", "厚生", "警備", "抽出"];
   static depNames = [
     ["制御", "管制1", "管制2", "設計"],

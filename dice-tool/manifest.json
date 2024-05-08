@@ -1,6 +1,6 @@
 {
-  "short_name": "AsCt支援",
-  "name": "AsCt判定支援ツール",
+  "short_name": "ACst支援",
+  "name": "ACst判定支援ツール",
   "display": "standalone",
   "start_url": "index.html",
   "icons": [

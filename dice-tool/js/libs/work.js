@@ -4,7 +4,12 @@ import { AbnmBasic, AbnmTool } from "../data/AbData.js";
 let dice_num = 1;
 let dice_faces = 6;
 
-
+export default class Work{
+  empId = "";
+  abId = "";
+  wkId = 0;
+  flg = false;
+}
 
 export function setWorkType(abnm_data) {
   $.each(abnm_data.work_data.work_types, (index, work_type) => {
