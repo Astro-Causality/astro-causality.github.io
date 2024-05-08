@@ -10,8 +10,8 @@
   <link rel="icon" href="./favicon/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><!-- 180×180 -->
   <link rel="stylesheet" href="./css/style.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="./js/main_test.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script type="module" src="./js/main_test.js"></script>
   <title>AsCt判定支援ツール</title>
 </head>
 
@@ -24,54 +24,57 @@
       </div>
     </header>
     <main id="content"><!-- メインコンテンツ -->
-      <form name="selector_depart" method="post">
+      <form name="selector_depart" method="post"><!-- 部門選択・セット -->
         <div>
-          <label>
+          <label><!-- 選択用プルダウン -->
             <h2>【部門を選択】</h2>
             <select name="department">
               <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
               <optgroup label="上層">
-                <option value="00">本部 - 制御課</option><!--
-                <option value="01">情報部 - 検閲課</option>
-                <option value="02">人事部 - 教育課</option>
-                <option value="03">厚生部 - 安全課</option>-->
+                <option value="00">本部 - 制御課</option>
+                <!--
+                  <option value="10">情報部 - 検閲課</option>
+                  <option value="20">人事部 - 教育課</option>
+                  <option value="30">厚生部 - 安全課</option>
+                -->
               </optgroup>
               <!--
               <optgroup label="中層">
-                <option value="04">本部 - 管制課A</option>
-                <option value="05">本部 - 管制課B</option>
-                <option value="06">人事部 - 懲戒課</option>
-                <option value="07">厚生部 - 福祉課</option>
-                <option value="08">警備部 - 防衛課</option>
-                <option value="09">警備部 - 視察課</option>
+                <option value="01">本部 - 管制課A</option>
+                <option value="02">本部 - 管制課B</option>
+                <option value="21">人事部 - 懲戒課</option>
+                <option value="31">厚生部 - 福祉課</option>
+                <option value="40">警備部 - 防衛課</option>
+                <option value="41">警備部 - 視察課</option>
               </optgroup>
               <optgroup label="下層">
-                <option value="10">抽出部 - 精製課</option>
-                <option value="11">抽出部 - 抽出課</option>
-                <option value="12">情報部 - 記録課</option>
-                <option value="13">本部 - 設計課</option>
-              </optgroup>-->
+                <option value="50">抽出部 - 精製課</option>
+                <option value="51">抽出部 - 抽出課</option>
+                <option value="11">情報部 - 記録課</option>
+                <option value="03">本部 - 設計課</option>
+              </optgroup>
+              -->
             </select>
           </label>
           <input type="button" id="set_depart" value="セット">
           <input type="button" id="clear_depart" value="選択解除">
-        </div>
-        <div id="depart_info" style="visibility:collapse;">
-          <h2 id="depart_name" style="text-align: center;"></h2>
-          <div>
-            <h2>【職員を選択】</h2>
-            <ul id="em_list"></ul>
           </div>
-          <div>
-            <h2>【異次元体一覧】</h2>
-            <ul id="ab_list"></ul>
+          <div id="depart_info" style="visibility:collapse;">
+            <h2 id="depart_name" style="text-align: center;"></h2>
+            <div>
+              <h2>【職員を選択】</h2>
+              <ul id="em_list"></ul>
+            </div>
+            <div>
+              <h2>【異次元体一覧】</h2>
+              <ul id="ab_list"></ul>
+            </div>
+            <div>
+              <input type="button" id="start_work" value="業務開始">
+            </div>
           </div>
-          <div>
-            <input type="button" id="start_work" value="業務開始">
-          </div>
-        </div>
       </form>
-      <form name="roll_work" id="work_frm" method="post" style="visibility:collapse;"><!-- 作業ロール -->
+      <form name="roll_work" id="work_frm" method="post" style="visibility:collapse; overflow:hidden;"><!-- 作業ロール -->
         <div>
           <h2>【作業対象を選択】</h2>
           <ul id="ab_select"></ul>
@@ -239,7 +242,7 @@ ID:ID3桁
 自制:1&#009;&#009;&#009;&#009;自制ランク
 正義:1&#009;&#009;&#009;&#009;正義ランク
 加護:000&#009;&#009;&#009;付与されている加護等の異次元体ID(3桁)&emsp;複数ある場合は半角コンマで区切る
-現在カウント:1&#009;&#009;現在のカウンター
+現在カウント:1&#009;&#009;現在のディムカウンター
           </pre>
         </div>
       </details>

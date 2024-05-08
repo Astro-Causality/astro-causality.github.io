@@ -1,3 +1,5 @@
+import Department from "./libs/Department.js";
+
 //危険度・ダメージ属性・ステータス名置換用
 const RankTxt = ["ZAYIN", "TETH", "HE", "WAW", "ALEPH"];
 const DmgTypeTxt = ["RED", "WHITE", "BLACK", "PALE"];
@@ -7,7 +9,7 @@ const StatusTxt = ["勇気", "慎重", "自制", "正義"];
 const Retry = 0;
 
 //ロード完了時処理
-$(function () {
+export default $(function () {
   "use strict";
 
   //バージョン記載
@@ -16,12 +18,10 @@ $(function () {
   );
 
   $("#set_depart").click(function () {
-    $.getJSON("./data/base.json", (data) => {
-      console.log(JSON.stringify(data));
-      retryNum = toString(Retry).padStart(2, "0");
-    });
-    abListGen();
-    emListGen();
+    // 部門データ生成
+    const Dep = new Department($("#department").val());
+    $("#depart_name").text(Dep.departName);
+
     $("#depart_info, #em_list, #ab_list").css("visibility", "visible");
   });
 
@@ -37,7 +37,7 @@ $(function () {
   });
 
   //ダイスツールの「振る」ボタン
-  $("input#opt_roll").click(rollOptionalDice());
+  $("#opt_roll").click(rollOptionalDice());
 });
 
 function saveLocalStorage() {
@@ -88,41 +88,6 @@ function rollOptionalDice() {
   }
 }
 
-//部門内の異次元体リストを作成
-function abListGen() {
-  let abnmBasicList = [];
-  $.getJSON("./data/test/AbnmTest.json", (data)=> {
-    abnmBasicList = data;
-
-      $.each(abnmBasicList, (i, slot) => {
-        console.log(`▼ ${toString(i).padStart(3, "0")} ▼\n${slot}`);
-        const AbThumb = $("#ab_list").add("div.ab_view");
-        AbThumb.attr("title", "クリックでエンサイクロペディアを表示(別タブ)");
-        const AbTile = $("#ab_select").add("label.ab_select");
-        AbTile.add('input[name="select_abnm"]:radio').css("display", "none");
-        AbTile.add("div.ab_thumbnail");
-        $(`.ab_select:nth-child(${i + 1}), .ab_view:nth-child(${i + 1})`).css(
-          "background-image",
-          `url('../css/img/abnm/${slot.code}.png')`
-        );
-
-        const AbName = AbTile.add("p");
-        //詐称あり
-        if ((slot.fake_name || slot.fake_rank) && slot.truth_lv != null && slot.obs_lv >= slot.truth_lv) {
-          if (slot.fake_name && slot.fake_rank) {
-            AbName.text(`${slot.name[1]} / ${RankTxt[slot.rank[1]]}`);
-          } else if (!slot.fake_name && slot.fake_rank) {
-            AbName.text(`${slot.name[0]} / ${RankTxt[slot.rank[1]]}`);
-          } else if (slot.fake_name && !slot.fake_rank) {
-            AbName.text(`${slot.name[1]} / ${RankTxt[slot.rank[0]]}`);
-          }
-        }
-        //詐称なし
-        else AbName.text(`${slot.name[0]} / ${RankTxt[slot.rank[0]]}`);
-      });
-    });
-}
-
 //部門内の職員リストを作成
 function emListGen() {
   let emList = [];
@@ -137,5 +102,5 @@ function emListGen() {
       });
       EmTile.add("p").text(`${slot.id}: ${slot.details.nm}`);
     });
-  })
+  });
 }

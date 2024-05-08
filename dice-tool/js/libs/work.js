@@ -1,15 +1,12 @@
 import * as logGen from "./log_gen.js";
-import { AbnmBasic, AbnmTool } from "./Abnormality.js";
-
-const WorkBasic = ["本能", "洞察", "愛着", "抑圧",];
-const WorkTool = [["使用","返却"],["使用開始","使用中止"],];
+import { AbnmBasic, AbnmTool } from "../data/AbData.js";
 
 let dice_num = 1;
 let dice_faces = 6;
 
 
 
-function setWorkType(abnm_data) {
+export function setWorkType(abnm_data) {
   $.each(abnm_data.work_data.work_types, (index, work_type) => {
     const Item = $("#work_select").add("option");
     Item.text(work_type);
@@ -17,7 +14,7 @@ function setWorkType(abnm_data) {
   });
 }
 
-function rollWorkDice() {
+export function rollWorkDice() {
   dice_num = document.roll_work["st_b_wk"].value;
   dice_faces = document.roll_work["dice_num_wk"].value;
   let dice_tmp = 0;
@@ -31,7 +28,7 @@ function rollWorkDice() {
   logGen.setText(dice_sum);
 }
 
-function displayLink() {
+export function displayLink() {
   const LinkTag = $("#link_log").add("a#info_link");
   conc = con.map(function (value, index) {
     return value[0];
@@ -45,16 +42,16 @@ function displayLink() {
     LinkTag.attr({
       href: LinkData,
       target: "_blank",
-      rel: "noopener noreferrer"
+      rel: "noopener noreferrer",
     });
     LinkTag.text("エンサイクロペディア (別タブ)");
   }
 }
 
-function nowJudging() {
+export function nowJudging() {
   let irai = 0;
   let ab_rank = 0; //危険度ランク
-  let gene = "";
+  let ab_name = "";
   let agent = "NO NAME"; //職員名
   let work_no = 0;
 
@@ -79,8 +76,6 @@ function nowJudging() {
   //テキストの生成
 }
 
-function calcExp() {
+export function calcExp() {
   let no = work_no + 1;
 }
-
-export * as work from "./work.js";
