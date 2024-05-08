@@ -1,38 +1,34 @@
 export default class Employee {
-  id;
-  nm;
-  gender;
-  gdst;
+  id = "000";
+  nm = "NONAME";
+  gender = 1;
+  gdst = 0;
   st;
   strk;
   agrk;
-  exp;
-  equip;
-  gifts;
-  bufs;
+  exp = [0, 0, 0, 0];
+  equip = ["999", "999"]; // [武器ID,防具ID]
+  gifts = {
+    head: "",
+    face: "",
+    eye: "",
+    mouth: "",
+    hand: "",
+    cheek: "",
+    chest: "",
+    back_l: "",
+    back_r: "",
+    special: "",
+  };
+  bufs = [""];
   constructor(id, nm, gender, good) {
     this.id = toString(id).padStart(3, "0");
     this.nm = nm;
     this.gender = gender;
     this.gdst = good; // 0:勇気 1:慎重 2:自制 3:正義
     this.st = initSt(this.gdst); // ステータス数値
-    this.strk = calcRank(this.st);
+    this.strk = calcStRank(this.st);
     this.agrk = calcAgRank();
-    this.exp = [0, 0, 0, 0];
-    this.equip = ["999", "999"]; // [武器ID,防具ID]
-    this.gifts = {
-      head: "",
-      face: "",
-      eye: "",
-      mouth: "",
-      hand: "",
-      cheek: "",
-      chest: "",
-      back_l: "",
-      back_r: "",
-      special: "",
-    };
-    this.bufs = [""];
   }
 
   get unitID() {
