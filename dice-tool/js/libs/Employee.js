@@ -1,4 +1,4 @@
-export default class Employee {
+export class Employee {
   id = "000";
   nm = "NONAME";
   gender = 1;
@@ -68,6 +68,16 @@ export default class Employee {
   set initSt(good) {
     this.st = [15, 15, 15, 15];
     this.st[good] = 25;
+  }
+
+  // 特定バフを消去
+  set removeBuf(buf) {
+    this.bufs = this.bufs.filter(b => b !== buf);
+  }
+
+  //バフリセット
+  removeAllBufs() {
+    this.bufs = [];
   }
 
   // 能力ランク計算

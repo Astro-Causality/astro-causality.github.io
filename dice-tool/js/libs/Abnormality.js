@@ -3,19 +3,28 @@ class Abnormality {
   nm = "";    //名前
   rk = 0;     //0:ZAYIN 1:TETH 2:HE 3:WAW 4:ALEPH
   tp = 0;     //1:通常 2:ツール
-  obLv = 1;   //観測レベル
+  obLv = 0;   //観測レベル
   wct = 0;    //作業回数
   pg = "";    //Privatter+のページID
+  lvup = 3;
 
   get mngCode() {
     return `AC-${this.id[0]}-${this.id[1]}-${this.id[2]}`;
   }
   get pgLink() {
     if (pg == "") return "";
-    else return `https://privatter.me/page/${this.pg}?p=${this.obLv}#contents`;
+    else return `https://privatter.me/page/${this.pg}?p=${(this.obLv+1)}#contents`;
   }
 
   triggerAbility(agent) {
+  }
+
+  workCtUp() {
+    this.wct++;
+    if (this.wct === this.lvup&&this.obLv<4) {
+      this.obLv++;
+      this.lvup += 3;
+    }
   }
 }
 
@@ -24,9 +33,10 @@ export class AbnmBasic extends Abnormality {
   nm = "";
   rk = 0;
   tp = 1;
-  obLv = 1;
+  obLv = 0;
   wct = 0;
   pg = "";
+  lvup = 3;
   maxpe = 0;  //1回の作業で得られるPE-Box上限
   wksc = 0;   //作業判定時の目標値
   wcate = []; //作業の名称
@@ -79,9 +89,10 @@ export class AbnmTool extends Abnormality {
   nm = "";
   rk = 0;
   tp = 2;
-  obLv = 1;
+  obLv = 0;
   wct = 0;
   pg = "";
+  lvup = 3;
   constructor(id, nm, rk, pg) {
     this.id = id;
     this.nm = nm;

@@ -45,30 +45,3 @@ $(function () {
   //ダイスツールの「振る」ボタン
   $("#opt_roll").on("click", rollOptionalDice());
 });
-
-function saveLocalStorage() {
-  //職員データをローカルストレージとJSONファイルで保存
-  const json_header = [{ no: setlog.length }, { data: save }];
-  let data_json = JSON.stringify(json_header);
-  localStorage.setItem("data_employees", data_json);
-  const SaveDate = new Date();
-  const FileName =
-    "ACST_save_" +
-    toString(SaveDate.getFullYear()) +
-    toString(SaveDate.getMonth()).padStart(2, "0") +
-    toString(SaveDate.getDate()).padStart(2, "0") +
-    ".json";
-  const LinkTag = document.createElement("a");
-  LinkTag.href = "data:text/plain," + encodeURIComponent(data_json);
-  LinkTag.download = FileName;
-  LinkTag.click();
-}
-
-function resetAll() {
-  $("#depart_info, #em_list, #ab_list").css("visibility", "collapse");
-  for (let i = 0; i < $("#ab_list label").length; i++) {
-    $(`#${i + 1}`).remove();
-  }
-
-  localStorage.removeItem("data_employees");
-}
