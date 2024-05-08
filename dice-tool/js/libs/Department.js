@@ -1,4 +1,4 @@
-import DepData from "../../Setting.js";
+import {DepData} from "../../Setting.js";
 
 export default class Department {
   depId = "";
