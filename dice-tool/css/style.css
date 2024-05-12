@@ -90,7 +90,7 @@
     background-repeat: no-repeat;
   }
 
-  #content {
+  main {
     border: 3px solid #3691de;
     margin-top: 30px;
     margin-left: auto;
@@ -102,7 +102,7 @@
     white-space: pre-wrap;
   }
 
-  .twe {
+  #work_judge {
     position: relative;
     bottom: 40px;
   }
@@ -144,7 +144,7 @@
     color: #3691de;
   }
 
-  .twe2 {
+  .emp_num {
     margin-left: 5px;
     padding: 3px 10px 3px 10px;
   }
@@ -168,6 +168,16 @@
     background-color: #000;
     border: solid 1px #63b1d1;
     color: #99ffff;
+  }
+
+  select{
+    background-color: #0055cc80;
+    border: solid 1px #63b1d1;
+    color: #99ffff;
+  }
+
+  select:active{
+    
   }
 
   summary {
@@ -223,13 +233,13 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-  .twe {
+  #work_judge {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     margin-left: 5px;
     padding: 10px;
   }
-  .twe2 {
+  .emp_num {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     margin-left: 5px;

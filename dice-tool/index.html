@@ -5,9 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="./manifest.json">
-  <link rel="shortcut icon" type="image/x-icon" href="./favicon/favicon.ico"><!-- 32×32 -->
-  <link rel="shortcut icon" type="image/svg+xml" href="/icon.svg">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- 180×180 -->
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="./css/style.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
   <script type="module" src="./js/main.js"></script>
@@ -28,29 +27,29 @@
           <label><!-- 選択用プルダウン -->
             <h2>【部門を選択】</h2>
             <select name="department">
-              <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
+              <option selected hidden value="">選択してください</option>
               <optgroup label="上層">
-                <option value="00">本部 - 制御課</option>
+                <option value="A0">本部 - 制御課</option>
                 <!--
-                  <option value="10">情報部 - 検閲課</option>
-                  <option value="20">人事部 - 教育課</option>
-                  <option value="30">厚生部 - 安全課</option>
+                  <option value="B0">情報部 - 検閲課</option>
+                  <option value="C0">人事部 - 教育課</option>
+                  <option value="D0">厚生部 - 安全課</option>
                 -->
               </optgroup>
               <!--
               <optgroup label="中層">
-                <option value="01">本部 - 管制課A</option>
-                <option value="02">本部 - 管制課B</option>
-                <option value="21">人事部 - 懲戒課</option>
-                <option value="31">厚生部 - 福祉課</option>
-                <option value="40">警備部 - 防衛課</option>
-                <option value="41">警備部 - 視察課</option>
+                <option value="A1">本部 - 管制1課</option>
+                <option value="A2">本部 - 管制2課</option>
+                <option value="C1">人事部 - 懲戒課</option>
+                <option value="D1">厚生部 - 福祉課</option>
+                <option value="E0">警備部 - 防衛課</option>
+                <option value="E1">警備部 - 視察課</option>
               </optgroup>
               <optgroup label="下層">
-                <option value="50">抽出部 - 精製課</option>
-                <option value="51">抽出部 - 抽出課</option>
-                <option value="11">情報部 - 記録課</option>
-                <option value="03">本部 - 設計課</option>
+                <option value="F0">抽出部 - 精製課</option>
+                <option value="F1">抽出部 - 抽出課</option>
+                <option value="B1">情報部 - 記録課</option>
+                <option value="A3">本部 - 設計課</option>
               </optgroup>
               -->
             </select>
@@ -59,37 +58,47 @@
           <input type="button" id="clear_depart" value="選択解除">
           </div>
           <div id="depart_info" style="visibility:collapse;">
-            <h2 id="depart_name" style="text-align: center;"></h2>
-            <div>
-              <h2>【職員を選択】</h2>
-              <ul id="em_list"></ul>
-            </div>
+            <h2 id="depart_name" style="text-align: center;">未選択</h2>
             <div>
               <h2>【異次元体一覧】</h2>
-              <ul id="ab_list"></ul>
-            </div>
-            <div>
-              <input type="button" id="start_work" value="業務開始">
+              <p>クリック(タップ)でエンサイクロペディアを閲覧できます。</p>
+              <div id="ab_list"></div>
             </div>
           </div>
       </form>
-      <form name="roll_work" id="work_frm" method="post" style="visibility:collapse;"><!-- 作業ロール -->
+      <details><summary>【配属職員】</summary>
+        <form name="set_emp" id="set_emp" method="post">
+          <div class="box">
+            <div>
+              <ul style="list-style-type:none;" id="emp_assign">
+              </ul>
+              <input type="button" class="emp_num" value="+" id="add_emp"><input type="button" class="emp_num" value="-" id="reduce_emp">&emsp;&emsp;
+              <input type="button" value="保存">&nbsp;<input type="button" value="読み込み">
+              <div><p>注意：一度セットボタンを押さないと正しく保存されません</p></div>
+            </div>
+          </div>
+        </form>
+      </details>
+
+      <form name="roll_work" id="work_frm" method="post"><!-- 作業ロール -->
         <div>
           <h2>【作業対象を選択】</h2>
-          <ul id="ab_select"></ul>
-          </div>
-          <div>
+          <div id="ab_select"></div>
+        </div>
+        <div>
+          <input type="button" value="セット" id="set_wktp">
           <label for="dice">作業</label>
           <select name="work_type" id="work_select">
-            <option disabled selected>▼&nbsp;選択してください&nbsp;▼</option>
+            <option selected hidden>選択してください</option>
           </select>
           <input type="number" name="st_b_wk" id="st_b_wk" value="1">
           <label for="dice">D</label>
           <input type="number" name="dice_num_wk" id="dice_num_wk" value="6">
           <input type="button" value="ダイス" id="diceroll_work">
-          <label for="dice">装備効果・固有能力などによる成功値補正:<input type="number" name="buf" id="buf" value="0">
+          <label for="dice">装備効果・固有能力などによる補正：&nbsp;<input type="number" name="buf" id="buf" value="0">
           </label>
         </div>
+        <!--ログ用データ-->
         <textarea id="result_work" name="result" cols="40" rows="15">
 &#64;AstroCausality
 #ACst_作業
@@ -104,36 +113,32 @@ ID:ID3桁
 自制:1
 正義:1
 加護:ID1,ID2,ID3…
-現在カウント:1
-        </textarea>
-        <input type="button" value="判定する" class="twe">
-        <textarea name="del" cols="40" rows="15"></textarea>
+現在カウント:1</textarea>
+        <input type="button" value="判定する" id="work_judge">
+        <textarea id="result_work2" name="result_work2" cols="40" rows="15"></textarea>
         <div id="link_log"></div>
         <div id="escape_log"></div>
       </form>
-      <form name="opt_diceroll" method="post">
-        <details>
-          <summary>ダイスツール</summary>
-          <div>
-            <p>ダイスを自由に設定し、指定回数一括で振ることができます。特殊能力のお供にどうぞ。</p>
-          </div>
+      <details><summary>ダイスツール</summary>
+        <div>
+          <p>ダイスを自由に設定し、指定回数一括で振ることができます。特殊能力のお供にどうぞ。</p>
+        </div>
+        <form name="opt_diceroll" method="post">
           <div>
             <input type="number" name="st_p" id="opt_num" value="1">
             <label for="dice">D</label>
             <input type="number" name="dice" id="opt_faces" value="6">
             <label for="dice">を&nbsp;</label>
             <input type="number" name="dice" id="opt_times" value="1">
-            <label for="dice"> 回</label>
+            <label for="dice">回&nbsp;</label>
             <input type="button" id="opt_roll" value="振る">
           </div>
-          <ul style="list-style-type: decimal-leading-zero; padding-left: 40px;">
-            <div id="result_opt"></div>
-          </ul>
-        </details>
-      </form>
+        </form>
+        <ul style="list-style-type:decimal-leading-zero; padding-left:40px;" id="result_opt">
+        </ul>
+      </details>
 
-      <details><!-- 鎮圧ロール -->
-        <summary>【鎮圧】</summary>
+      <details><summary>【鎮圧】</summary>
         <p>耐性右の数値は補正等&emsp;負の数(-x)や小数(0.x)も入力できます。</p>
         <form name="roll_supress" method="post">
           <input type="number" name="st_pale" id="st_pale" value="1">
@@ -175,7 +180,7 @@ ID:ID3桁
         </form>
       </details>
       <details><summary>リザルトポイント計算ツール</summary>
-        <form name="total_result" method="post">
+        <form name="total_result" id="total_result" method="post">
           <div>
             <label for="dice">異次元体への作業成果(合計獲得PE-Box数)
               <input type="number" name="work_pe_sum" id="work_pe_sum" value="0">
@@ -250,8 +255,7 @@ ID:ID3桁
       <div>
         <details><summary>獲得経験値</summary>
           <form name="exp_result" method="post">
-            <ul style="list-style-type:none; padding-left:40px;">
-              <div id="exp_result"></div>
+            <ul style="list-style-type:none; padding-left:40px;" id="exp_result">
             </ul>
           </form>
         </details>
@@ -265,11 +269,9 @@ ID:ID3桁
       </div>
     </main>
     <footer><!-- フッター -->
-      <div id="ft_wrap">
         <div class="logo"></div><!-- ロゴマーク -->
-          <p id="ft_text">Astro&nbsp;Causality<br>
-          &#64;AstroCausality</p>
-      </div>
+        <p id="ft_text">Astro&nbsp;Causality<br>
+        &#64;AstroCausality</p>
     </footer>
   </div>
 </body>
